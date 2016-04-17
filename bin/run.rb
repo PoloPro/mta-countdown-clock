@@ -1,21 +1,13 @@
 require_relative "../config/environment.rb"
 
-GTFS_URL = "http://datamine.mta.info/mta_esi.php?key=ecdac9dab9595408073272ba5dec9cc1"
-STATIONS_URL = "http://mtaapi.herokuapp.com/stations"
+gtfs_url = "http://datamine.mta.info/mta_esi.php?key=ecdac9dab9595408073272ba5dec9cc1"
+stations_url = "http://mtaapi.herokuapp.com/stations"
 
-mta_interface = ApiInterface.new
-mta_interface.load_trip_data(GTFS_URL)
-mta_interface.load_station_data(STATIONS_URL)
+interface = MtaApiInterface.new(gtfs_url, stations_url)
+interface.create_schedule
+schedule = interface.schedule.next_n_arrivals("34 St - Penn Station", 10)
 
-station = "631S"
-puts "Station ID: #{station}"
-puts "Station   : #{mta_interface.get_station_name(station)}"
-
-n = 10
-trains = mta_interface.get_next_n_trains(n, station)
-puts "---------------"
-puts "The next #{n} trains to arrive will be:"
-trains.each do |train|
-  puts "A #{train[:direction]} #{train[:route_id]} train arriving at #{train[:time]}."
+schedule.each do |arrival|
+  puts "A #{arrival[:direction]} #{arrival[:trip_name]} train is arriving at #{arrival[:arrival_time].strftime("%I:%M:%S%p")}."
 end
 

@@ -6,13 +6,11 @@ require 'pry'
 require 'json'
 require 'date'
 
+# Modules
 require_relative '../lib/data-format.rb'
 
-# require_relative '../lib/trip.rb'
-# require_relative '../lib/stop-time-update.rb'
-# require_relative '../lib/api-interface.rb'
-
-require_relative '../lib/trip-2.rb'
+# Classes
+require_relative '../lib/trip.rb'
 require_relative '../lib/stop.rb'
 require_relative '../lib/schedule.rb'
 require_relative '../lib/mta-api-interface.rb'

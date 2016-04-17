@@ -19,7 +19,7 @@ class Schedule
       name        = trip[:trip][:route_id]
       stop_times  = trip[:stop_time_update]
 
-      new_schedule.trips << Trip2.create(id, date, name, stop_times)
+      new_schedule.trips << Trip.create(id, date, name, stop_times)
     end
     new_schedule
   end

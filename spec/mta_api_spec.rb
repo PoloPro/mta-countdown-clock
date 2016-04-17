@@ -29,7 +29,7 @@ describe 'MTA Countdown Clock' do
 
     it 'properly loads with Trip objects' do
       interface.create_schedule
-      expect(interface.schedule.trips.first).to be_a(Trip2)
+      expect(interface.schedule.trips.first).to be_a(Trip)
     end
 
     describe '#next_n_arrivals' do
@@ -39,31 +39,31 @@ describe 'MTA Countdown Clock' do
       end
 
       it 'returns an array of hashes' do
-        expect(@schedule.next_n_arrivals("170 St", 2).first).to be_a(Hash)
+        expect(@schedule.next_n_arrivals("170 St", 2).sample).to be_a(Hash)
       end
 
       it 'each hash contains a trip id' do
-        expect(@schedule.next_n_arrivals("96 St", 3).first[:trip_id]).to be_a(String)
+        expect(@schedule.next_n_arrivals("96 St", 3).sample[:trip_id]).to be_a(String)
       end
 
       it 'each hash contains a trip name' do
-        expect(@schedule.next_n_arrivals("96 St", 5).first[:trip_name]).to be_a(String)
+        expect(@schedule.next_n_arrivals("96 St", 5).sample[:trip_name]).to be_a(String)
       end
 
       it 'each hash contains an arrival time' do
-        expect(@schedule.next_n_arrivals("Bleecker St", 3).first[:arrival_time]).to be_a(String)
+        expect(@schedule.next_n_arrivals("Bleecker St", 3).sample[:arrival_time]).to be_a(DateTime)
       end
 
       it 'each hash contains a direction' do
-        expect(@schedule.next_n_arrivals("Bleecker St", 4).first[:direction]).to be_a(String)
+        expect(@schedule.next_n_arrivals("Bleecker St", 4).sample[:direction]).to be_a(String)
       end
 
     end
   end
 
-  describe 'Trip2' do
+  describe 'Trip' do
     it 'initializes with an empty stops array' do
-      new_trip = Trip2.new
+      new_trip = Trip.new
       expect(new_trip.stops).to be_empty
     end
 
