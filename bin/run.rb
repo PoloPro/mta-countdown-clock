@@ -1,6 +1,6 @@
 require_relative "../config/environment.rb"
 
-gtfs_url = "http://datamine.mta.info/mta_esi.php?key=ecdac9dab9595408073272ba5dec9cc1"
+gtfs_url = "your personal MTA key here"
 stations_url = "http://mtaapi.herokuapp.com/stations"
 
 interface = MtaApiInterface.new(gtfs_url, stations_url)
